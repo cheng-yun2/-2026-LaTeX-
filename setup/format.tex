@@ -1,297 +1,153 @@
 % !Mode:: "TeX:UTF-8"
-%%%%%%%%%%%%%%%%% Fonts Definition and Basics %%%%%%%%%%%%%%%%%
-\setmainfont{Times New Roman}              % 全局英文字体设为Times New Roman
-\newcommand{\song}{\CJKfamily{zhsong}}    % 宋体
-\newcommand{\fs}{\CJKfamily{zhfs}}        % 仿宋体
-\newcommand{\kai}{\CJKfamily{zhkai}}      % 楷体
-\newcommand{\hei}{\CJKfamily{zhhei}}      % 黑体
-\newcommand{\li}{\CJKfamily{zhli}}        % 隶书
+%  Authors: 某某 --2022级海南大学生物医学工程学学生
 
-\newcommand{\myfont}{\fontsize{52pt}{52pt}\selectfont}       % 特初号, 单倍行距
-\newcommand{\yihao}{\fontsize{26pt}{26pt}\selectfont}       % 一号, 单倍行距
-\newcommand{\xiaoyi}{\fontsize{24pt}{24pt}\selectfont}      % 小一, 单倍行距
-\newcommand{\erhao}{\fontsize{22pt}{1.25\baselineskip}\selectfont}       % 二号, 1.25倍行距
-\newcommand{\xiaoer}{\fontsize{18pt}{18pt}\selectfont}      % 小二, 单倍行距
-\newcommand{\sanhao}{\fontsize{16pt}{16pt}\selectfont}      % 三号, 单倍行距
-\newcommand{\xiaosan}{\fontsize{15pt}{15pt}\selectfont}     % 小三, 单倍行距
-\newcommand{\sihao}{\fontsize{14pt}{14pt}\selectfont}       % 四号, 单倍行距
-\newcommand{\xiaosi}{\fontsize{12pt}{12pt}\selectfont}      % 小四, 单倍行距
-\newcommand{\wuhao}{\fontsize{10.5pt}{10.5pt}\selectfont}   % 五号, 单倍行距
-\newcommand{\xiaowu}{\fontsize{9pt}{9pt}\selectfont}        % 小五, 单倍行距
-
-% \CJKtilde 重新定义了波浪符~的意义/最新ctex宏包自动处理，删除无关命令
-\punctstyle{hangmobanjiao}             % 调整中文字符的表示，行内占一个字符宽度，行尾占半个字符宽度
-
-% 调整罗列环境的布局
-\setitemize{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=-0em}
-\setenumerate{leftmargin=3em,itemsep=0em,partopsep=0em,parsep=0em,topsep=0em}
-
-% 避免宏包 hyperref 和 arydshln 不兼容带来的目录链接失效的问题。
-\def\temp{\relax}
-\let\temp\addcontentsline
-\gdef\addcontentsline{\phantomsection\temp}
-
-% 自定义项目列表标签及格式 \begin{publist} 列表项 \end{publist}
-\newcounter{pubctr} %自定义新计数器
-\newenvironment{publist}{%%%%%定义新环境
-\begin{list}{[\arabic{pubctr}]} %%标签格式
-    {
-     \usecounter{pubctr}
-     \setlength{\leftmargin}{2.5em}   % 左边界 \leftmargin =\itemindent + \labelwidth + \labelsep
-     \setlength{\itemindent}{0em}     % 标号缩进量
-     \setlength{\labelsep}{1em}       % 标号和列表项之间的距离,默认0.5em
-     \setlength{\rightmargin}{0em}    % 右边界
-     \setlength{\topsep}{0ex}         % 列表到上下文的垂直距离
-     \setlength{\parsep}{0ex}         % 段落间距
-     \setlength{\itemsep}{0ex}        % 标签间距
-     \setlength{\listparindent}{0pt}  % 段落缩进量
-    }}
-{\end{list}}
-
-\makeatletter
-\renewcommand\normalsize{
-  \@setfontsize\normalsize{12pt}{12pt} % 小四对应 12 pt
-  \setlength\abovedisplayskip{4pt}
-  \setlength\abovedisplayshortskip{4pt}
-  \setlength\belowdisplayskip{\abovedisplayskip}
-  \setlength\belowdisplayshortskip{\abovedisplayshortskip}
-  \let\@listi\@listI}
-\def\defaultfont{\renewcommand{\baselinestretch}{1.5}\normalsize\selectfont} % 设置行距
-
-\renewcommand{\CJKglue}{\hskip -0.1 pt plus 0.08\baselineskip} % 控制字间距，使每行 34 个汉字
-\makeatother
-
-%%%%%%%%%%%%% Contents %%%%%%%%%%%%%%%%%
-\renewcommand{\contentsname}{目\qquad\qquad 录}
-\setcounter{tocdepth}{3} % 控制目录深度
-% 一级标题（章）号，宋体：小四
-\titlecontents{chapter}[2em]{\vspace{.5\baselineskip}\xiaosi\song}
-             {\thecontentslabel\quad}{}
-             {\hspace{.5em}\titlerule*[10pt]{$\cdot$}\xiaosi\contentspage}
-
-% 二级标题（节）：小四号，宋体
-\titlecontents{section}[3em]{\vspace{.25\baselineskip}\xiaosi\song}
-             {\thecontentslabel\quad}{}
-             {\hspace{.5em}\titlerule*[10pt]{$\cdot$}\xiaosi\contentspage}
-
-% 三级标题（小节）：小四号，宋体
-\titlecontents{subsection}[4em]{\vspace{.25\baselineskip}\xiaosi\song}
-             {\thecontentslabel\quad}{}
-             {\hspace{.5em}\titlerule*[10pt]{$\cdot$}\xiaosi\contentspage}
-% 非编号章节（致谢、参考文献等）目录格式：小四号，宋体
-\titlecontents{chapter*}[2em]{\vspace{.5\baselineskip}\xiaosi\song}
-             {}{}
-             {\hspace{.5em}\titlerule*[10pt]{$\cdot$}\xiaosi\contentspage}
-
-%%%%%%%%%% Chapter and Section %%%%%%%%%%%%%
-\setcounter{secnumdepth}{5}
-\setlength{\parindent}{2em}
-
-\renewcommand{\chaptername}{\thechapter}
-\ctexset{
-    chapter = {
-        name = {,},
-        number = \arabic*
-    }
+%%%%%%%%%% Package %%%%%%%%%%%%
+\usepackage{ulem}         % 支持换行题目
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape}
+\WarningFilter{latexfont}{Size substitutions with differences}
+\WarningFilter{latexfont}{Some font shapes were not available}
+\hbadness=10000
+\vbadness=10000
+\hfuzz=20pt
+\vfuzz=20pt
+\usepackage{graphicx}                       % 支持插图处理
+\usepackage[a4paper,             % A4纸
+  % portrait,            % 纵向打印（默认，显式声明更清晰）
+  top=25.4mm,          % 上页边距：2.54cm
+  bottom=25.4mm,       % 下页边距：2.54cm
+  left=31.7mm,         % 左页边距：3.17cm（不含装订线）
+  right=31.7mm,        % 右页边距：3.17cm
+  % bindingoffset=10mm,  % 装订线：1.0cm
+  % binding=left,        % 装订线位置：左
+  % head=15mm,           % 页眉高度（足够显示论文题目）
+  % headsep=8mm,         % 页眉与正文间距
+  headheight=5mm,      % 页眉文本框的高度（5mm约14pt，足够容纳单行页眉且不会报 Underfull 警告）
+  headsep=5.4mm,
+  foot=7.5mm            % 页脚高度（足够显示页码）
+  ]{geometry}
+                                            % 支持版面尺寸设置
+\let\minute\relax
+\let\hour\relax
+\usepackage[squaren]{SIunits}               % 支持国际标准单位
+\usepackage{mathptmx}
+\usepackage{fontspec}
+\usepackage{titlesec}                       % 控制标题的宏包
+% \usepackage{ctexcap}                        % 支持中文章节标题
+\usepackage{titletoc}                       % 控制目录的宏包
+\usepackage{pifont}                         % 用于实现带圈数字 ①
+\usepackage{fancyhdr}                       % fancyhdr宏包 支持页眉和页脚的相关定义
+% \usepackage[UTF8]{ctex}                     % 支持中文显示
+% \usepackage{CJKpunct}
+\usepackage{color}                          % 支持彩色
+\usepackage{amsmath}                        % AMSLaTeX宏包 用来排出更加漂亮的公式
+\usepackage{amssymb}                        % 数学符号生成命令
+\usepackage[below]{placeins}    %允许上一个section的浮动图形出现在下一个section的开始部分,还提供\FloatBarrier命令,使所有未处理的浮动图形立即被处理
+\usepackage{float}
+\usepackage{multirow}                       % 使用Multirow宏包，使得表格可以合并多个row格
+\usepackage{booktabs}                       % 表格，横的粗线；\specialrule{1pt}{0pt}{0pt}
+\usepackage{longtable}                      % 支持跨页的表格。
+\usepackage{tabularx}                       % 自动设置表格的列宽
+\usepackage{subfigure}                      % 支持子图 %centerlast 设置最后一行是否居中
+\usepackage[subfigure]{ccaption}            % 支持子图的中文标题
+\usepackage[sort&compress,numbers]{natbib}  % 支持引用缩写的宏包
+\usepackage{enumitem}                       % 使用enumitem宏包,改变列表项的格式
+\usepackage{calc}                           % 长度可以用+ - * / 进行计算
+\usepackage{txfonts}                        % 字体宏包
+\usepackage{bm}                             % 处理数学公式中的黑斜体的宏包
+% \usepackage[amsmath,thmmarks,hyperref]{ntheorem}  % 定理类环境宏包，其中 amsmath 选项用来兼容 AMS LaTeX 的宏包
+\usepackage[amsmath,thmmarks]{ntheorem}
+\usepackage{CJKnumb}                        % 提供将阿拉伯数字转换成中文数字的命令
+\usepackage{indentfirst}                    % 首行缩进宏包
+% \usepackage{CJKutf8}                        % 用在UTF8编码环境下，它可以自动调用CJK，同时针对UTF8编码作了设置
+%\usepackage{hypbmsec}                      % 用来控制书签中标题显示内容
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\usepackage{xcolor}
+%支持代码环境
+\usepackage{listings}
+\lstset{
+numberstyle=\scriptsize ,
+basicstyle=\rmfamily\scriptsize ,
+language=Matlab,
+extendedchars=false,
+showstringspaces=false,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keywordstyle=\color{blue!70},
+commentstyle=\color{red!50!green!50!blue!50},
+frame=shadowbox,
+rulesepcolor=\color{red!20!green!20!blue!20}
 }
-\titleformat{\chapter}{\centering\xiaosan\song\bfseries}{\hei\chaptername}{1em}{}
-\titlespacing{\chapter}{0pt}{0.1\baselineskip}{0.5\baselineskip}
+%支持算法环境
+\usepackage[boxed,ruled,lined]{algorithm2e}
+\usepackage{algorithmic}
 
-\titleformat{\section}{\sihao\song\bfseries}{\thesection}{1em}{}
-\titlespacing{\section}{0pt}{0.15\baselineskip}{0.25\baselineskip}
+\usepackage{array}
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
+\newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
+\newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
 
-\titleformat{\subsection}{\xiaosi\song\bfseries}{\thesubsection}{1em}{}
-\titlespacing{\subsection}{0pt}{0.1\baselineskip}{0.3\baselineskip}
+\def\usewhat{lualatex}     %选择lualatex编译
+% 生成有书签的 pdf 及其生成方式。通常可以在 tjumain.tex 文件的第一行选择 pdflatex 或者是 dvipdfmx 编译手段。如果选择前者，则使用 pdflatex + pdflatex 编译; 如果选择后者，在编译的时候选择 latex + bibtex + latex + latex 编译。出现混淆的时候，系统会报错。
+% 如果您的pdf制作中文书签有乱码使用如下命令，就可以解决了
+\def\atemp{dvipdfmx}\ifx\atemp\usewhat
+\usepackage[dvipdfmx,unicode,               % dvipdfmx 编译, 加入了中文复制，粘贴支持引擎。
+            pdfstartview=FitH,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=true, %注释掉此项则交叉引用为彩色边框(将colorlinks和pdfborder同时注释掉)
+            pdfborder=001,   %注释掉此项则交叉引用为彩色边框
+            citecolor=black,
+            linkcolor=black,
+            anchorcolor=black,
+            urlcolor=black,
+            breaklinks=true
+            ]{hyperref}
+\fi
+% lualatex编译配置
+\def\atemp{lualatex}\ifx\atemp\usewhat
+\usepackage[unicode,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=false,
+            pdfborder={0 0 0},
+            citecolor=blue,
+            linkcolor=red,
+            anchorcolor=green,
+            urlcolor=blue,
+            breaklinks=true
+            ]{hyperref}
+\fi
 
-\titleformat{\subsubsection}{\xiaosi\song\bfseries}{\thesubsubsection}{1em}{}
-\titlespacing{\subsubsection}{0pt}{0.05\baselineskip}{0.1\baselineskip}
+\def\atemp{pdflatex}\ifx\atemp\usewhat
+\usepackage{cmap}                           % pdflatex 编译时，可以生成可复制、粘贴的中文 PDF 文档， 缺点是在Windows上显示时效果不大好，字体发虚
+\usepackage[pdftex,unicode,
+            %CJKbookmarks=true,
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=false,
+            pdfborder={0 0 1},
+            citecolor=blue,
+            linkcolor=red,
+            anchorcolor=green,
+            urlcolor=blue,
+            breaklinks=true
+            ]{hyperref}
+\fi
 
-%%%%%%%%%% Table, Figure and Equation %%%%%%%%%%%%%%%%%
-\renewcommand{\tablename}{表}                                     % 插表题头
-\renewcommand{\figurename}{图}                                    % 插图题头
-\renewcommand{\lstlistingname}{代码}
-\renewcommand{\thefigure}{\arabic{chapter}-\arabic{figure}}       % 使图编号为 7-1 的格式 %\protect{~}
-\renewcommand{\thesubfigure}{\alph{subfigure})}                   % 使子图编号为 a) 的格式
-\renewcommand{\thesubtable}{(\alph{subtable})}                    % 使子表编号为 (a) 的格式
-\renewcommand{\thetable}{\arabic{chapter}-\arabic{table}}         % 使表编号为 7-1 的格式
-\renewcommand{\theequation}{\arabic{chapter}-\arabic{equation}}   % 使公式编号为 7-1 的格式
-\renewcommand{\thelstlisting}{\thesection-\arabic{lstlisting}}
-
-%%%%%% 定制浮动图形和表格标题样式 %%%%%%
-\makeatletter
-\long\def\@makecaption#1#2{
-   \vskip\abovecaptionskip
-   \sbox\@tempboxa{\centering\wuhao\song{#1\qquad #2} }
-   \ifdim \wd\@tempboxa >\hsize
-     \centering\wuhao\song{#1\qquad #2} \par
-   \else
-     \global \@minipagefalse
-     \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}
-   \fi
-   \vskip\belowcaptionskip}
-\makeatother
-\captiondelim{~~~~} %用来控制longtable表头分隔符
-
-%%%%%%%%%% Theorem Environment %%%%%%%%%%%%%%%%%
-\theoremstyle{plain}
-\theorembodyfont{\song\rmfamily}
-\theoremheaderfont{\hei\rmfamily}
-\newtheorem{theorem}{定理~}[chapter]
-\newtheorem{lemma}{引理~}[chapter]
-\newtheorem{axiom}{公理~}[chapter]
-\newtheorem{proposition}{命题~}[chapter]
-\newtheorem{prop}{性质~}[chapter]
-\newtheorem{corollary}{推论~}[chapter]
-\newtheorem{definition}{定义~}[chapter]
-\newtheorem{conjecture}{猜想~}[chapter]
-\newtheorem{example}{例~}[chapter]
-\newtheorem{remark}{注~}[chapter]
-%\newtheorem{algorithm}{算法~}[chapter]
-\newenvironment{proof}{\noindent{\hei 证明：}}{\hfill $ \square $ \vskip 4mm}
-\theoremsymbol{$\square$}
-
-%%%%%%%%%% Page: number, header and footer  %%%%%%%%%%%%%%%%%
-
-%\frontmatter 或 \pagenumbering{roman}
-%\mainmatter 或 \pagenumbering{arabic}
-\makeatletter
-\renewcommand\frontmatter{\clearpage
-  \@mainmatterfalse
-  }
-\makeatother
-
-%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%
-\renewcommand{\bibname}{参考文献}
-% 重定义参考文献样式，来自thu
-\makeatletter
-\renewenvironment{thebibliography}[1]{
-   \titleformat{\chapter}{\centering\sanhao\song\bfseries}{}{0em}{}
-   \chapter*{\bibname}
-   \wuhao\song % 中文五号宋体
-   \list{\@biblabel{\@arabic\c@enumiv}}
-        {\renewcommand{\makelabel}[1]{##1\hfill}
-         \settowidth\labelwidth{0 cm}
-         \setlength{\labelsep}{0pt}
-         \setlength{\itemindent}{0pt}
-         \setlength{\leftmargin}{\labelwidth+\labelsep}
-         \addtolength{\itemsep}{-0.7em}
-         \usecounter{enumiv}
-         \let\p@enumiv\@empty
-         \renewcommand\theenumiv{\@arabic\c@enumiv}}
-    \sloppy\frenchspacing
-    \clubpenalty4000
-    \@clubpenalty \clubpenalty
-    \widowpenalty4000
-    \interlinepenalty4000
-    \sfcode`\.\@m}
-   {\def\@noitemerr
-     {\@latex@warning{Empty `thebibliography' environment}}
-    \endlist\frenchspacing}
-\makeatother
-
-\addtolength{\bibsep}{-0.5em}     % 缩小参考文献间的垂直间距
-\setlength{\bibhang}{2em}         % 每个条目自第二行起缩进的距离
-
-% 参考文献引用作为上标出现
-%\newcommand{\citeup}[1]{\textsuperscript{\cite{#1}}}
-\makeatletter
-    \def\@cite#1#2{\textsuperscript{[{#1\if@tempswa , #2\fi}]}}
-\makeatother
-%% 引用格式
-\bibpunct{[}{]}{,}{s}{}{,}
-
-%%%%%%%%%%%% Cover %%%%%%%%%%%%%%%%%
-% 封面、摘要、版权、致谢格式定义
-\makeatletter
-\def\ctitle#1{\def\@ctitle{#1}}\def\@ctitle{}
-\def\cdegree#1{\def\@cdegree{#1}}\def\@cdegree{}
-\def\caffil#1{\def\@caffil{#1}}\def\@caffil{}
-\def\csubject#1{\def\@csubject{#1}}\def\@csubject{}
-\def\cgrade#1{\def\@cgrade{#1}}\def\@cgrade{}
-\def\cauthor#1{\def\@cauthor{#1}}\def\@cauthor{}
-\def\cnumber#1{\def\@cnumber{#1}}\def\@cnumber{}
-\def\csupervisor#1{\def\@csupervisor{#1}}\def\@csupervisor{}
-\def\crank#1{\def\@crank{#1}}\def\@crank{}
-\def\cdate#1{\def\@cdate{#1}}\def\@cdate{}
-\long\def\cabstract#1{\long\def\@cabstract{#1}}\long\def\@cabstract{}
-\long\def\eabstract#1{\long\def\@eabstract{#1}}\long\def\@eabstract{}
-\def\ckeywords#1{\def\@ckeywords{#1}}\def\@ckeywords{}
-\def\ekeywords#1{\def\@ekeywords{#1}}\def\@ekeywords{}
-\def\cheading#1{\def\@cheading{#1}}\def\@cheading{}
-\def\xibie#1{\def\@xibie{#1}}\def\@xibie{}
-\def\nianji#1{\def\@nianji{#1}}\def\@nianji{}
-%\def\cheading#1{\def\@cheading{#1}}\def\@cheading{}
-\pagestyle{fancy}
-  \fancyhf{}
-  \fancyhead[C]{\song\wuhao \@cheading}
-  \fancyfoot[C]{\song\xiaowu ~\thepage~}
-\newlength{\@title@width}
-
-% 定义封面
-\def\makecover{
-%\cleardoublepage%
-   \phantomsection
-    \pdfbookmark[-1]{\@ctitle}{ctitle}
-
-\begin{titlepage}
-    \vspace{24pt}
-    \begin{center}
-    \song\sihao{ \ \\}
-    \song\sihao{ \ \\}
-    \song\sihao{ \ \\}
-    \song\sihao{ \ \\}
-
-    \song\yihao{海~~南~~大~~学\\}
-    \vspace{22pt}  
-    \hei\yihao{毕~~业~~论~~文（设计）\\}
-    \vspace{112pt}  \vspace{60pt}
-    \setlength{\@title@width}{8.1cm}
-    {\sanhao\song{
-    \begin{tabular}{lc}
-        题\qquad 目:&  \underline{\makebox[\@title@width][c]{\@ctitle}}\\[6pt]
-        学\qquad 号:&  \underline{\makebox[\@title@width][c]{\@cnumber}}\\[6pt]
-        姓\qquad 名:&  \underline{\makebox[\@title@width][c]{\@cauthor}}\\[6pt]
-        年\qquad 级:&  \underline{\makebox[\@title@width][c]{\@nianji}}\\[6pt]
-        学\qquad 院:&  \underline{\makebox[\@title@width][c]{\@caffil}}\\[6pt]
-        系\qquad 别:&  \underline{\makebox[\@title@width][c]{\@xibie}}\\[6pt]
-        专\qquad 业:&  \underline{\makebox[\@title@width][c]{\@csubject}}\\[6pt]
-        指导教师:   &  \underline{\makebox[\@title@width][c]{\@csupervisor}} \\[6pt]
-        完成日期:   &  \song\makebox[\@title@width][l]{\@cdate}\\
-    \end{tabular}}
- }
-  \vspace{31pt}
-
-%\song\sanhao{\textbf{\@cdate}}
-\end{center}
-\end{titlepage}
-
-%%%%%%%%%%%%%%%%%%%   Abstract and Keywords  %%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\markboth{摘~要}{摘~要}
-\pdfbookmark[0]{摘~~要}{cabstract}
-%\addcontentsline{toc}{chapter}{摘~要}
-\chapter*{\centering\sanhao\song\bfseries 摘\qquad\qquad 要}
-\song\defaultfont
-\@cabstract
-\vspace{\baselineskip}
-
-\hangafter=1\hangindent=52.3pt\noindent
-{\song\xiaosi\bfseries 关键词：} \@ckeywords
-\thispagestyle{empty}
-
-%%%%%%%%%%%%%%%%%%%   English Abstract  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-%\phantomsection
-\markboth{Abstract}{Abstract}
-\pdfbookmark[0]{Abstract}{eabstract}
-%\addcontentsline{toc}{chapter}{ABSTRACT}
-\chapter*{\centering\sanhao\bfseries{Abstract}}
-%\vspace{\baselineskip}
-\@eabstract
-\vspace{\baselineskip}
-
-\hangafter=1\hangindent=60pt\noindent
-{\bfseries Keywords:} \@ekeywords
-\thispagestyle{empty}
-}
-\makeatother
+% xelatex编译配置（添加xetex选项）
+\def\atemp{xelatex}\ifx\atemp\usewhat
+\usepackage[xetex,unicode,  % 新增xetex引擎声明
+            bookmarksnumbered=true,
+            bookmarksopen=true,
+            colorlinks=false,
+            pdfborder={0 0 0},
+            citecolor=blue,
+            linkcolor=red,
+            anchorcolor=green,
+            urlcolor=blue,
+            breaklinks=true
+            ]{hyperref}
+\fi
